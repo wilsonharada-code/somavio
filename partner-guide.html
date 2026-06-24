@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- SomaVio Version: V1.1 · Updated: 2026-06-19 · Scope: Weather/status standardization, official-source timestamps, adaptive alert suppression, hotel offer alignment. -->
+
+<html data-sv-page="partner" lang="en">
+<head><meta content="partner-guide.html V1.1; updated 2026-06-19" name="somavio-version"/>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SomaVio | Peak &amp; Valley Guides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>:root{--stone:#2C2C2A;--sage:#6B7F6E;--mist:#F4F1EC;--glacier:#D6E4E1;--amber:#C8923A;--slate:#4A5568;--white:#FFFFFF;--shadow-1:0 1px 3px rgba(44,44,42,0.08);--shadow-2:0 4px 12px rgba(44,44,42,0.12);--r-card:8px;--r-btn:6px;--r-pill:100px;--font-display:'Playfair Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:var(--font-body);background:var(--mist);color:var(--stone);line-height:1.5;-webkit-font-smoothing:antialiased;}img{display:block;max-width:100%;}a{text-decoration:none;color:inherit;}button{cursor:pointer;border:none;background:none;font-family:inherit;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}.container{max-width:1280px;margin:0 auto;padding:0 40px;}.label-caps{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;}.context-bar{position:sticky;top:0;z-index:100;height:36px;background:var(--mist);border-bottom:1px solid rgba(44,44,42,0.08);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--slate);}.ctx-accent{color:var(--sage);font-weight:600;}.site-header{position:sticky;top:36px;z-index:99;height:64px;background:var(--stone);display:flex;align-items:center;}.header-inner{display:flex;align-items:center;width:100%;max-width:1280px;margin:0 auto;padding:0 40px;}.logo{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:20px;color:var(--white);font-weight:700;flex-shrink:0;}.logo-icon{width:32px;height:32px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;}.logo-icon svg{color:var(--white);}.main-nav{display:flex;align-items:center;gap:4px;margin-left:36px;flex:1;}.main-nav a{padding:6px 11px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8);border-radius:var(--r-btn);transition:color 0.2s;}.main-nav a:hover{color:var(--white);}.header-actions{display:flex;align-items:center;gap:10px;margin-left:auto;}.lang-toggle{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1.5px solid rgba(255,255,255,0.2);border-radius:var(--r-pill);color:var(--white);font-size:13px;font-weight:500;background:transparent;cursor:pointer;}.partner-hero{position:relative;height:400px;overflow:hidden;}.partner-hero img{width:100%;height:100%;object-fit:cover;}.partner-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:32px 40px;background:linear-gradient(to top,rgba(44,44,42,0.82) 0%,transparent 100%);}.partner-hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--sage);color:var(--white);font-size:10px;font-weight:700;padding:4px 12px;border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;}.partner-hero-title{font-family:var(--font-display);font-size:36px;color:var(--white);font-weight:400;margin-bottom:6px;}.partner-hero-sub{font-size:14px;color:rgba(255,255,255,0.85);}.partner-layout{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;padding:32px 0 64px;}.partner-main{display:flex;flex-direction:column;gap:20px;}.p-card{background:var(--white);border-radius:var(--r-card);box-shadow:var(--shadow-1);padding:24px;}.p-card-title{font-size:16px;font-weight:700;color:var(--stone);margin-bottom:12px;}.p-card-text{font-size:14px;color:var(--slate);line-height:1.65;}.p-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}.p-tag{font-size:12px;font-weight:600;padding:5px 12px;border-radius:var(--r-pill);background:var(--glacier);color:var(--stone);}.p-tag.green{background:rgba(13,148,136,0.12);color:#0D9488;}.safety-card{background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.2);border-radius:var(--r-card);padding:20px;}.safety-card-title{font-size:14px;font-weight:700;color:#0D9488;margin-bottom:8px;display:flex;align-items:center;gap:8px;}.safety-card-title svg{width:16px;height:16px;}.safety-card-text{font-size:13px;color:var(--slate);line-height:1.55;}.partner-sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:116px;}.s-card{background:var(--white);border-radius:var(--r-card);box-shadow:var(--shadow-1);padding:18px;}.s-card-title{font-size:13px;font-weight:700;color:var(--stone);margin-bottom:12px;}.s-btn{display:block;text-align:center;width:100%;padding:11px;border-radius:var(--r-btn);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;margin-bottom:8px;}.s-btn:last-child{margin-bottom:0;}.s-btn-primary{background:var(--sage);color:var(--white);border:none;}.s-btn-primary:hover{background:#5a6f60;}.s-btn-ghost{background:var(--mist);color:var(--stone);border:1.5px solid var(--glacier);}.s-btn-ghost:hover{background:var(--glacier);}.s-info-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(44,44,42,0.06);font-size:13px;}.s-info-row:last-child{border-bottom:none;}.s-info-row svg{color:var(--sage);flex-shrink:0;width:15px;height:15px;margin-top:1px;}.s-info-label{font-weight:600;color:var(--stone);}.s-info-val{color:var(--slate);}.curated-note{background:rgba(107,127,110,0.08);border:1px solid var(--glacier);border-radius:var(--r-card);padding:14px;}.curated-note-title{font-size:11px;font-weight:700;color:var(--sage);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}.curated-note-text{font-size:12px;color:var(--slate);line-height:1.5;}.footer-b2b{background:var(--stone);padding:48px 0 24px;margin-top:64px;}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.3fr 1fr;gap:40px;margin-bottom:24px;}.footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:18px;color:var(--white);font-weight:700;margin-bottom:10px;}.footer-tagline{font-size:13px;color:var(--glacier);margin-bottom:4px;}.footer-copy{font-size:11px;color:var(--slate);}.footer-col-title{color:var(--glacier);margin-bottom:12px;}.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:8px;transition:color 0.2s;}.footer-col a:hover{color:var(--white);}.footer-message{font-size:11px;color:var(--slate);line-height:1.6;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}@media(max-width:900px){.partner-layout{grid-template-columns:1fr;}.partner-sidebar{position:static;}.footer-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:720px){.container{padding:0 16px;}.header-inner{padding:0 16px;}.main-nav{display:none;}.partner-hero{height:300px;}.partner-hero-overlay{padding:20px 16px;}.partner-hero-title{font-size:28px;}.partner-layout{padding:20px 0 40px;}.footer-grid{grid-template-columns:1fr;}}</style>
+</head>
+<body>
+<div class="context-bar"><span><span class="ctx-accent">Canmore · Guided Experiences</span></span></div>
+<header class="site-header"><div class="header-inner"><a class="logo" href="index.html"><span class="logo-icon"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span>SomaVio</a><nav aria-label="Site navigation" class="main-nav"><a data-i18n="nav_explore_canmore" href="index.html">Explore Canmore</a><a data-i18n="nav_outdoor_adventures" href="category.html">Outdoor Adventures</a><a data-i18n="nav_local_rules" href="local-rules.html">Local Rules</a><a data-i18n="nav_plans_changed" href="plans-changed.html">Plans Changed?</a><a data-i18n="nav_plan_your_day" href="trip.html">My Trip</a><a class="sv-guesthub-link is-guesthub-context" data-default-href="hotel.html" data-guest-href="guesthub.html" data-guesthub-link="" data-i18n="nav_guesthub_signin" href="hotel.html">Guest Hub / Sign In</a></nav><div class="header-actions"><div class="lang-selector-wrap">
+<button aria-expanded="false" aria-haspopup="true" class="lang-toggle" id="lang-toggle" type="button">EN <svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+<div aria-label="Language selector" class="lang-dropdown" id="lang-dropdown" role="menu">
+<button class="lang-option active" data-lang="en" role="menuitem" type="button"><span class="lang-flag">🇬🇧</span><span data-i18n="language_english">English</span></button>
+<button class="lang-option" data-lang="ja" role="menuitem" type="button"><span class="lang-flag">🇯🇵</span><span data-i18n="language_japanese">日本語</span></button>
+</div>
+</div><div class="mobile-actions"><button aria-label="Open navigation menu" class="hamburger-btn" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg></button></div></div></div></header><div class="drawer-overlay" id="drawer-overlay"></div><div aria-label="Navigation menu" aria-modal="true" class="drawer" id="drawer" role="dialog"><div class="drawer-header"><div class="drawer-logo"><div class="drawer-logo-icon"><svg fill="none" height="14" stroke="#fff" stroke-width="1.5" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div>SomaVio</div><button aria-label="Close menu" class="drawer-close" type="button"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button></div><div class="drawer-nav"><div class="drawer-nav-label" data-i18n="drawer_nav_label">Navigate</div><a data-i18n="nav_explore_canmore" href="index.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M9 20v-6h6v6"></path></svg><span>Explore Canmore</span></a><a data-i18n="nav_outdoor_adventures" href="category.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg><span>Outdoor Adventures</span></a><a data-i18n="nav_local_rules" href="local-rules.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>Local Rules</span></a><a data-i18n="nav_plans_changed" href="plans-changed.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 19H8a6 6 0 1 1 5.4-8.6A4.5 4.5 0 1 1 17.5 19Z"></path></svg><span>Plans Changed?</span></a><a data-i18n="nav_plan_your_day" href="trip.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="4"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>My Trip</span></a><a class="sv-guesthub-link is-guesthub-context" data-default-href="hotel.html" data-guest-href="guesthub.html" data-guesthub-link="" data-i18n="nav_guesthub_signin" href="hotel.html"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15 8 3 3"></path><path d="m18 5 3 3"></path></svg><span>Guest Hub / Sign In</span></a></div><div class="drawer-lang"><div class="drawer-lang-label" data-i18n="drawer_language">Language</div><div class="drawer-lang-grid"><button class="drawer-lang-btn lang-option active" data-lang="en" type="button">🇬🇧 EN</button><button class="drawer-lang-btn lang-option" data-lang="ja" type="button">🇯🇵 JA</button></div></div><div class="drawer-footer" data-i18n="drawer_footer">SomaVio · Local guidance for Alberta
+© 2026</div></div><section aria-label="Current weather and official-source status" class="sv-live-status">
+<div class="container sv-live-status-inner">
+<article class="sv-status-card sv-weather-card">
+<div class="sv-status-card-header"><span aria-hidden="true" class="sv-status-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></span><span class="sv-status-kicker">Today in Canmore</span></div>
+<div class="sv-status-main">☀️ 18°C · Sunny Day</div>
+<p class="sv-status-sub">Good visibility for town walks, scenic viewpoints and flexible outdoor planning.</p>
+<div class="sv-status-meta">Weather snapshot checked by SomaVio: 9:10 AM</div>
+</article>
+<article class="sv-status-card sv-alert-card">
+<div class="sv-status-card-header"><span aria-hidden="true" class="sv-status-icon"><svg fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path></svg></span><span class="sv-status-kicker">Official-source check</span></div>
+<div class="sv-status-main">Trail, wildlife, road and weather alerts should be verified before departure.</div>
+<p class="sv-status-sub">SomaVio can display alerts from official sources for visitor orientation, but it is not the official source.</p>
+<div class="sv-status-meta">Source layer: Parks Canada / Alberta Parks / Town of Canmore · Last checked by SomaVio: 9:10 AM</div>
+<a class="sv-status-link" href="safety.html">Verify official sources →</a>
+</article>
+</div>
+<div class="sv-status-disclaimer"><strong>For real-time status:</strong> consult the official source directly. Conditions in mountain areas can change after SomaVio's last check.</div>
+</section>
+<section class="partner-hero">
+<img alt="Guided hiking group on mountain trail" data-sv-image="guide" loading="eager" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1280&amp;q=85&amp;auto=format&amp;fit=crop"/>
+<div class="partner-hero-overlay">
+<div class="partner-hero-badge"><svg fill="none" height="11" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="11" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Curated by SomaVio</div>
+<h1 class="partner-hero-title">Peak &amp; Valley Guides</h1>
+<p class="partner-hero-sub">Certified guides · Small groups · Bear safety included</p>
+</div>
+</section>
+<main><div class="container"><div class="partner-layout">
+<div class="partner-main">
+<div class="p-card"><h2 class="p-card-title">What's good today</h2><p class="p-card-text">First time in the Rockies? No experience needed. Peak &amp; Valley leads small groups of 4–8 on beginner-friendly trails with real wildlife safety training. Every tour includes bear awareness, proper trail behaviour, and how to use bear spray safely. Parks Canada approved curriculum.</p><div class="p-tags"><span class="p-tag green">Certified guide</span><span class="p-tag">Beginner-friendly</span><span class="p-tag">Small groups</span><span class="p-tag">Wildlife-safe</span><span class="p-tag">First-time visitor</span></div></div>
+<div class="safety-card"><div class="safety-card-title"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>Bear Safety Training Included</div><p class="safety-card-text">Every tour includes Parks Canada approved bear safety curriculum — bear spray operation, encounter protocol, and trail behaviour. Your guide carries bear spray and first aid equipment.</p></div>
+<div class="p-card"><h2 class="p-card-title">Tour details</h2><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg><div><span class="s-info-label">Group size: </span><span class="s-info-val">4–8 people maximum</span></div></div><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><div><span class="s-info-label">Duration: </span><span class="s-info-val">3–4 hours</span></div></div><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"></path></svg><div><span class="s-info-label">Difficulty: </span><span class="s-info-val">Easy to moderate — all experience levels</span></div></div><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="1" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><div><span class="s-info-label">Cost: </span><span class="s-info-val">CAD $85/person · Includes all equipment</span></div></div></div>
+<div class="p-card"><h2 class="p-card-title">Similar options nearby</h2><p class="p-card-text" style="margin-bottom:12px;"><strong>Canmore Alpine Guides</strong> — More technical routes, advanced groups.</p><p class="p-card-text"><strong>Kananaskis Outdoor School</strong> — Multi-day programs and skill development.</p></div>
+</div>
+<aside class="partner-sidebar">
+<div class="s-card"><button class="s-btn s-btn-primary" onclick="bookTour()">Book a tour</button><button class="s-btn s-btn-ghost" onclick="saveToTrip('Peak &amp; Valley Guides')">Save to My Trip</button></div>
+<div class="s-card"><div class="s-card-title">Contact</div><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 2.81 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><div><span class="s-info-label">Phone: </span><span class="s-info-val">(403) 678-5000</span></div></div><div class="s-info-row"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><div><span class="s-info-label">Booking: </span><span class="s-info-val">At least 24 hrs in advance</span></div></div></div>
+<div class="curated-note"><div class="curated-note-title">Curated by SomaVio</div><p class="curated-note-text">Recommended for first-time visitors and beginners. Bear safety certified.</p></div>
+</aside>
+</div></div></main>
+<footer class="footer-b2b"><div class="container"><div class="footer-grid"><div><div class="footer-logo"><span class="logo-icon"><svg fill="none" height="14" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span>SomaVio</div><p class="footer-tagline">Local guidance for Alberta.</p><p class="footer-copy">© 2025 SomaVio</p></div><div class="footer-col"><div class="footer-col-title label-caps">For Visitors</div><a href="index.html">Explore</a><a href="category.html">Categories</a><a href="trip.html">My Trip</a><a href="safety.html">Safety</a><a href="local-rules.html">Local Rules</a></div><div class="footer-col"><div class="footer-col-title label-caps">For Partners</div><a href="hotels.html">For Hotels</a><a href="partners.html">For Local Businesses</a><a href="organizations.html">For Organizations</a><a href="studio.html">Partner Studio</a><p class="footer-message">SomaVio complements existing systems. It does not replace PMS, OTA or emergency procedures.</p></div><div class="footer-col"><div class="footer-col-title label-caps">Legal</div><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Contact</a></div></div></div></footer>
+<script>function bookTour(){alert('Booking Peak & Valley Guides — call (403) 678-5000 or ask at your hotel concierge.');}function saveToTrip(n){try{const k='sv_trip';const e=JSON.parse(localStorage.getItem(k)||'[]');if(!e.includes(n)){e.push(n);localStorage.setItem(k,JSON.stringify(e));}alert(n+' saved to My Trip!');}catch(e){}}</script>
+<!-- DRAWER GLOBAL -->
+<style>
+.drawer-overlay{position:fixed;inset:0;z-index:500;background:rgba(44,44,42,0.55);opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:501;width:min(320px,85vw);background:#2C2C2A;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;}
+.drawer.open{transform:translateX(0);}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.drawer-logo{display:flex;align-items:center;gap:8px;font-family:Georgia,serif;font-size:18px;color:#fff;font-weight:700;}
+.drawer-logo-icon{width:28px;height:28px;background:#C8923A;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.drawer-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:rgba(255,255,255,0.7);}
+.drawer-nav{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.drawer-nav-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);padding:12px 20px 6px;}
+.drawer-nav a{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:15px;font-weight:500;color:rgba(255,255,255,0.82);transition:background 0.15s;text-decoration:none;}
+.drawer-nav a:hover{background:rgba(255,255,255,0.06);color:#fff;}
+.drawer-nav a svg{width:17px;height:17px;color:#6B7F6E;flex-shrink:0;}
+.drawer-lang{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+.drawer-lang-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+.drawer-lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.drawer-lang-btn{padding:9px 6px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.65);font-size:12px;font-weight:600;cursor:pointer;text-align:center;}
+.drawer-lang-btn.active{background:#6B7F6E;border-color:#6B7F6E;color:#fff;}
+.drawer-footer{margin-top:auto;padding:16px 20px;font-size:11px;color:rgba(255,255,255,0.25);line-height:1.5;border-top:1px solid rgba(255,255,255,0.06);}
+
+
+/* ═══════════════════════════════════════════════
+   SomaVio V1.1 — Unified Navigation + EN/JA Controls
+════════════════════════════════════════════════ */
+.main-nav { min-width: 0; }
+.main-nav a.active,
+.main-nav a[aria-current="page"] { color: var(--white) !important; background: rgba(255,255,255,0.10); }
+.sv-guesthub-link.guesthub-active-context { background: rgba(107,127,110,0.34); color: var(--white) !important; }
+.lang-selector-wrap { position: relative; }
+.lang-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.lang-dropdown { position: absolute; top: calc(100% + 8px); right: 0; z-index: 250; }
+.mobile-actions { display: none; align-items: center; gap: 12px; }
+.hamburger-btn { color: var(--white); display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+.hamburger-btn svg { width: 18px; height: 18px; }
+.drawer-overlay{position:fixed;inset:0;z-index:500;background:rgba(44,44,42,0.55);opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:501;width:min(320px,85vw);background:var(--stone,#2C2C2A);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;}
+.drawer.open{transform:translateX(0);}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.drawer-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-display,'Playfair Display',Georgia,serif);font-size:18px;color:var(--white,#fff);font-weight:700;}
+.drawer-logo-icon{width:28px;height:28px;background:var(--amber,#C8923A);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.drawer-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);transition:background 0.2s;border:none;}
+.drawer-close:hover{background:rgba(255,255,255,0.16);}
+.drawer-nav{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.drawer-nav-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);padding:12px 20px 6px;}
+.drawer-nav a{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:15px;font-weight:500;color:rgba(255,255,255,0.82);transition:background 0.15s,color 0.15s;text-decoration:none;}
+.drawer-nav a:hover,.drawer-nav a.active{background:rgba(255,255,255,0.06);color:var(--white,#fff);}
+.drawer-nav a svg{width:17px;height:17px;color:var(--sage,#6B7F6E);flex-shrink:0;}
+.drawer-lang{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+.drawer-lang-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+.drawer-lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.drawer-lang-btn{padding:9px 6px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.65);font-size:12px;font-weight:700;text-align:center;transition:all 0.15s;}
+.drawer-lang-btn:hover{background:rgba(255,255,255,0.08);color:var(--white,#fff);}
+.drawer-lang-btn.active{background:var(--sage,#6B7F6E);border-color:var(--sage,#6B7F6E);color:var(--white,#fff);}
+.drawer-footer{margin-top:auto;padding:16px 20px;font-size:11px;color:rgba(255,255,255,0.25);line-height:1.5;border-top:1px solid rgba(255,255,255,0.06);white-space:pre-line;}
+@media (max-width: 1180px){
+  .main-nav a { padding-left: 8px; padding-right: 8px; font-size: 13px; }
+}
+@media (max-width: 980px){
+  .main-nav { display: none !important; }
+  .mobile-actions { display: flex !important; }
+  .lang-selector-wrap { display: none; }
+}
+@media (max-width: 720px){
+  .drawer { width: min(340px, 88vw); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   SomaVio V1.1 — Unified Weather / Official-Source Status
+════════════════════════════════════════════════ */
+.sv-live-status{
+  position:relative; z-index:45;
+  background:linear-gradient(135deg,rgba(255,255,255,0.86),rgba(214,228,225,0.46));
+  border-bottom:1px solid rgba(44,44,42,0.08);
+  box-shadow:0 12px 34px rgba(44,44,42,0.06);
+}
+.sv-live-status .container{max-width:1280px;}
+.sv-live-status-inner{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.45fr);gap:12px;align-items:stretch;padding-top:14px!important;padding-bottom:14px!important;}
+.sv-status-card{background:rgba(255,255,255,0.52);backdrop-filter:blur(10px);border:1px solid rgba(44,44,42,0.08);border-radius:16px;padding:14px 16px;min-width:0;box-shadow:var(--shadow-1,0 1px 3px rgba(44,44,42,0.08));}
+.sv-status-card-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.sv-status-icon{width:30px;height:30px;border-radius:10px;background:rgba(107,127,110,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sv-status-icon svg{width:16px;height:16px;color:var(--sage,#6B7F6E);}
+.sv-status-kicker{font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--sage,#6B7F6E);}
+.sv-status-main{font-size:15px;font-weight:900;color:var(--stone,#2C2C2A);line-height:1.28;}
+.sv-status-sub{font-size:12px;color:var(--slate,#4A5568);line-height:1.5;margin-top:4px;}
+.sv-status-meta{font-size:11px;color:var(--slate,#4A5568);line-height:1.55;margin-top:7px;font-weight:700;}
+.sv-status-link{display:inline-flex;align-items:center;gap:5px;margin-top:7px;color:var(--sage,#6B7F6E);font-size:12px;font-weight:900;}
+.sv-status-disclaimer{max-width:1280px;margin:-5px auto 0;padding:0 40px 13px;font-size:11px;line-height:1.55;color:var(--slate,#4A5568);}
+.sv-status-disclaimer strong{color:var(--stone,#2C2C2A);}
+@media(max-width:980px){.sv-live-status-inner{grid-template-columns:1fr}.sv-status-disclaimer{padding-left:40px;padding-right:40px}}
+@media(max-width:720px){.sv-live-status-inner{padding-left:16px!important;padding-right:16px!important}.sv-status-disclaimer{padding-left:16px;padding-right:16px}.sv-status-card{border-radius:14px}}
+</style>
+<script>
+function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("drawer-overlay").classList.add("open");document.body.style.overflow="hidden";}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("drawer-overlay").classList.remove("open");document.body.style.overflow="";}
+function setDrawerLang(btn){document.querySelectorAll(".drawer-lang-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");localStorage.setItem("sv_lang",btn.getAttribute("data-lang"));closeDrawer();}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeDrawer();});
+</script>
+<script defer="True" src="somavio-live.js"></script></body></html>

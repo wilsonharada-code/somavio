@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<!-- SomaVio Version: V1.4 · Updated: 2026-06-24 · Scope: Independent Weather and Safety scenario controls below the hero, combined contextual recommendations. -->
+
+<html data-sv-page="plans-changed" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="plans-changed.html V1.4; updated 2026-06-24" name="somavio-version"/>
+<title>SomaVio | Plans Changed?</title>
+<meta content="Adaptive routes and flexible local alternatives for Canmore visitors when mountain plans change because of weather, trail alerts, wildlife activity or fatigue." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+    :root {
+      --stone:       #2C2C2A;
+      --sage:        #6B7F6E;
+      --mist:        #F4F1EC;
+      --glacier:     #D6E4E1;
+      --amber:       #C8923A;
+      --slate:       #4A5568;
+      --white:       #FFFFFF;
+      --care-teal:   #0D9488;
+      --care-amber:  #D97706;
+      --emergency:   #DC2626;
+      --shadow-1: 0 1px 3px rgba(44,44,42,0.08);
+      --shadow-2: 0 4px 12px rgba(44,44,42,0.12);
+      --shadow-3: 0 8px 32px rgba(44,44,42,0.18);
+      --r-card: 8px;
+      --r-btn:  6px;
+      --r-pill: 100px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 12% 6%, rgba(214,228,225,0.72), transparent 34%),
+        radial-gradient(circle at 88% 22%, rgba(200,146,58,0.12), transparent 30%),
+        var(--mist);
+      color: var(--stone);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button, select { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    .label-caps { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+
+    .context-bar {
+      position: sticky; top: 0; z-index: 100;
+      height: 36px; background: var(--mist);
+      border-bottom: 1px solid rgba(44,44,42,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 500; color: var(--slate); letter-spacing: 0.04em;
+    }
+    .ctx-accent { color: var(--sage); font-weight: 700; }
+
+    .site-header {
+      position: sticky; top: 36px; z-index: 99;
+      height: 64px; background: var(--stone);
+      display: flex; align-items: center;
+    }
+    .header-inner {
+      display: flex; align-items: center; width: 100%;
+      max-width: 1280px; margin: 0 auto; padding: 0 40px;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 20px;
+      color: var(--white); font-weight: 700; flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 32px; height: 32px; background: var(--amber);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { color: var(--white); }
+    .main-nav { display:flex; align-items:center; gap:2px; margin-left:24px; flex:1; min-width:0; }
+    .main-nav a {
+      padding:6px 8px; font-size:13px; font-weight:600;
+      color:rgba(255,255,255,0.80); border-radius:var(--r-btn);
+      transition:color .2s, background .2s; white-space:nowrap;
+    }
+    .main-nav a:hover, .main-nav a.active, .main-nav a[aria-current="page"] { color:var(--white); background:rgba(255,255,255,0.10); }
+    .sv-guesthub-link.guesthub-active-context { background: rgba(107,127,110,0.34); color: var(--white) !important; }
+    .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .lang-selector-wrap { position: relative; }
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 12px; border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: var(--r-pill); color: var(--white); font-size: 13px; font-weight: 700;
+      background: transparent; transition: border-color 0.2s;
+    }
+    .lang-toggle:hover { border-color: rgba(255,255,255,0.4); }
+    .lang-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: var(--white); border-radius: var(--r-card);
+      box-shadow: var(--shadow-2); padding: 8px; min-width: 150px;
+      display: none; flex-direction: column; gap: 2px; z-index: 250;
+    }
+    .lang-dropdown.open { display: flex; }
+    .lang-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: 6px;
+      font-size: 13px; font-weight: 600; color: var(--slate);
+      background: none; text-align: left; width: 100%; transition: background 0.15s, color 0.15s;
+    }
+    .lang-option:hover { background: var(--mist); color: var(--stone); }
+    .lang-option.active { color: var(--stone); background: var(--glacier); }
+    .lang-flag { font-size: 16px; }
+    .mobile-actions { display: none; align-items: center; gap: 12px; }
+    .hamburger-btn { color: var(--white); display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+    .hamburger-btn svg { width: 18px; height: 18px; }
+
+    .drawer-overlay{position:fixed;inset:0;z-index:500;background:rgba(44,44,42,0.55);opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+    .drawer-overlay.open{opacity:1;pointer-events:all;}
+    .drawer{position:fixed;top:0;right:0;bottom:0;z-index:501;width:min(320px,85vw);background:var(--stone);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;}
+    .drawer.open{transform:translateX(0);}
+    .drawer-header{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .drawer-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:18px;color:var(--white);font-weight:700;}
+    .drawer-logo-icon{width:28px;height:28px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+    .drawer-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);transition:background 0.2s;border:none;}
+    .drawer-nav{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .drawer-nav-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);padding:12px 20px 6px;}
+    .drawer-nav a{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:15px;font-weight:500;color:rgba(255,255,255,0.82);transition:background 0.15s,color 0.15s;}
+    .drawer-nav a:hover,.drawer-nav a.active{background:rgba(255,255,255,0.06);color:var(--white);}
+    .drawer-nav a svg{width:17px;height:17px;color:var(--sage);flex-shrink:0;}
+    .drawer-lang{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+    .drawer-lang-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+    .drawer-lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+    .drawer-lang-btn{padding:9px 6px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.65);font-size:12px;font-weight:700;text-align:center;transition:all 0.15s;}
+    .drawer-lang-btn:hover{background:rgba(255,255,255,0.08);color:var(--white);}
+    .drawer-lang-btn.active{background:var(--sage);border-color:var(--sage);color:var(--white);}
+    .drawer-footer{margin-top:auto;padding:16px 20px;font-size:11px;color:rgba(255,255,255,0.25);line-height:1.5;border-top:1px solid rgba(255,255,255,0.06);white-space:pre-line;}
+
+    .adaptive-hero {
+      position: relative;
+      min-height: 590px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      color: var(--white);
+      background-image:
+        linear-gradient(100deg, rgba(24,30,31,0.90) 0%, rgba(44,44,42,0.66) 47%, rgba(44,44,42,0.24) 100%),
+        url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1800&q=86&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+    .adaptive-hero::after {
+      content: '';
+      position: absolute; inset: auto 0 0 0;
+      height: 150px;
+      background: linear-gradient(to top, rgba(244,241,236,1), rgba(244,241,236,0));
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 2; width: 100%; padding: 76px 0 96px; }
+    .context-return-link {
+      display: inline-flex; align-items: center;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.78);
+      font-size: 13px;
+      font-weight: 800;
+      border-bottom: 1px solid rgba(255,255,255,0.32);
+    }
+    .context-return-link:hover { color: var(--white); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) 380px; gap: 46px; align-items: end; }
+    .hero-label { color: var(--glacier); margin-bottom: 15px; }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+      max-width: 820px;
+      text-shadow: 0 20px 64px rgba(0,0,0,0.28);
+    }
+    .hero-sub { margin-top: 22px; max-width: 690px; color: rgba(255,255,255,0.80); font-size: 17px; line-height: 1.7; }
+    .demo-panel {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(18px);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-3);
+    }
+    .demo-panel-label { color: rgba(255,255,255,0.56); margin-bottom: 9px; }
+    .weather-value { font-size: 21px; font-weight: 900; color: var(--white); line-height: 1.25; }
+    .weather-note { color: rgba(255,255,255,0.70); font-size: 12px; line-height: 1.55; margin-top: 8px; }
+    .scenario-label { color: rgba(255,255,255,0.62); margin: 18px 0 8px; }
+    .scenario-select {
+      width: 100%;
+      background: rgba(255,255,255,0.92);
+      color: var(--stone);
+      border: 1px solid rgba(255,255,255,0.26);
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-size: 13px;
+      font-weight: 800;
+      outline: none;
+    }
+
+    .filters-bar {
+      position: sticky;
+      top: 100px;
+      z-index: 50;
+      background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(44,44,42,0.08);
+      padding: 15px 0;
+    }
+    .filters-inner { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .filter-label { font-size: 12px; font-weight: 800; color: var(--slate); margin-right: 4px; }
+    .filter-btn {
+      padding: 8px 15px;
+      border-radius: var(--r-pill);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--slate);
+      border: 1.5px solid rgba(107,127,110,0.25);
+      background: rgba(255,255,255,0.70);
+      transition: all 0.18s ease;
+    }
+    .filter-btn.active { background: var(--stone); color: var(--white); border-color: var(--stone); }
+    .filter-btn:hover:not(.active) { border-color: var(--sage); color: var(--sage); }
+
+    .section { padding: 70px 0; }
+    .section-head { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, .85fr); gap: 28px; align-items: end; margin-bottom: 30px; }
+    .section-kicker { color: var(--amber); margin-bottom: 8px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(30px, 4vw, 48px); font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; }
+    .section-sub { color: var(--slate); font-size: 15px; line-height: 1.7; }
+    .results-count { color: var(--sage); font-size: 13px; font-weight: 900; margin-bottom: 16px; }
+
+    .adaptive-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .adaptive-card {
+      background: rgba(255,255,255,0.42);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(44,44,42,0.08);
+      border-radius: 18px;
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .adaptive-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+    .adaptive-card.is-hidden { display: none; }
+    .adaptive-card.is-highlighted { box-shadow: var(--shadow-3); border-color: rgba(200,146,58,0.30); }
+    .card-img { position: relative; height: 190px; background: var(--glacier); }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-context-tag {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(44,44,42,0.82);
+      color: var(--white);
+      border-radius: var(--r-pill);
+      padding: 5px 11px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .exp-save-btn {
+      position: absolute; top: 10px; right: 10px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-1);
+    }
+    .exp-save-btn svg { width: 16px; height: 16px; color: var(--stone); }
+    .exp-save-btn.saved { background: var(--sage); }
+    .exp-save-btn.saved svg { color: var(--white); }
+    .adaptive-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .featured-label { font-size: 10px; font-weight: 900; color: var(--amber); text-transform: uppercase; letter-spacing: .08em; }
+    .card-title { font-size: 17px; font-weight: 900; color: var(--stone); line-height: 1.25; }
+    .card-meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 12px; color: var(--slate); }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: var(--r-pill); background: rgba(214,228,225,0.82); color: var(--stone); }
+    .tag.green { background: rgba(13,148,136,0.13); color: var(--care-teal); }
+    .tag.amber { background: rgba(200,146,58,0.16); color: #8B641F; }
+    .tag.public { background: rgba(107,127,110,0.16); color: var(--sage); }
+    .card-desc { color: var(--slate); font-size: 13px; line-height: 1.58; flex: 1; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+    .card-cta, .card-ghost {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: var(--r-btn);
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: all .18s ease;
+    }
+    .card-cta { border: 1.5px solid var(--sage); color: var(--sage); }
+    .card-cta:hover { background: var(--sage); color: var(--white); }
+    .card-ghost { border: 1.5px solid var(--glacier); color: var(--stone); }
+    .card-ghost:hover { background: var(--glacier); }
+    .scenario-note {
+      margin-top: 26px;
+      background: rgba(44,44,42,0.06);
+      border: 1px solid rgba(44,44,42,0.08);
+      border-radius: 16px;
+      padding: 18px 20px;
+      color: var(--slate);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .scenario-note strong { color: var(--stone); }
+
+    .footer-b2b{background:var(--stone);padding:48px 0 24px;margin-top:30px;}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.3fr 1fr;gap:40px;margin-bottom:24px;}
+    .footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:18px;color:var(--white);font-weight:700;margin-bottom:10px;}
+    .footer-tagline{font-size:13px;color:var(--glacier);margin-bottom:4px;}
+    .footer-copy{font-size:11px;color:var(--slate);}
+    .footer-col-title{color:var(--glacier);margin-bottom:12px;}
+    .footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:8px;transition:color 0.2s;}
+    .footer-col a:hover{color:var(--white);}
+    .footer-message{font-size:11px;color:var(--slate);line-height:1.6;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);}
+
+    @media (max-width:1180px){ .main-nav a { padding-left: 7px; padding-right: 7px; font-size: 12.5px; } }
+    @media (max-width:980px){ .main-nav{display:none!important}.mobile-actions{display:flex!important}.lang-selector-wrap{display:none}.hero-grid{grid-template-columns:1fr}.demo-panel{max-width:560px}.filters-bar{top:100px}.adaptive-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{grid-template-columns:1fr}.footer-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:720px){ .container,.header-inner{padding:0 16px}.site-header{height:60px}.adaptive-hero{min-height:640px}.hero-inner{padding:56px 0 84px}.hero-title{font-size:42px}.hero-sub{font-size:15px}.filters-bar{top:96px}.filters-inner{overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px}.filter-btn{white-space:nowrap}.adaptive-grid{grid-template-columns:1fr}.card-img{height:180px}.footer-grid{grid-template-columns:1fr}.section{padding:54px 0} }
+  
+
+/* ═══════════════════════════════════════════════
+   SomaVio V1.1 — Unified Weather / Official-Source Status
+════════════════════════════════════════════════ */
+.sv-live-status{
+  position:relative; z-index:45;
+  background:linear-gradient(135deg,rgba(255,255,255,0.86),rgba(214,228,225,0.46));
+  border-bottom:1px solid rgba(44,44,42,0.08);
+  box-shadow:0 12px 34px rgba(44,44,42,0.06);
+}
+.sv-live-status .container{max-width:1280px;}
+.sv-live-status-inner{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.45fr);gap:12px;align-items:stretch;padding-top:14px!important;padding-bottom:14px!important;}
+.sv-status-card{background:rgba(255,255,255,0.52);backdrop-filter:blur(10px);border:1px solid rgba(44,44,42,0.08);border-radius:16px;padding:14px 16px;min-width:0;box-shadow:var(--shadow-1,0 1px 3px rgba(44,44,42,0.08));}
+.sv-status-card-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.sv-status-icon{width:30px;height:30px;border-radius:10px;background:rgba(107,127,110,0.13);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sv-status-icon svg{width:16px;height:16px;color:var(--sage,#6B7F6E);}
+.sv-status-kicker{font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--sage,#6B7F6E);}
+.sv-status-main{font-size:15px;font-weight:900;color:var(--stone,#2C2C2A);line-height:1.28;}
+.sv-status-sub{font-size:12px;color:var(--slate,#4A5568);line-height:1.5;margin-top:4px;}
+.sv-status-meta{font-size:11px;color:var(--slate,#4A5568);line-height:1.55;margin-top:7px;font-weight:700;}
+.sv-status-link{display:inline-flex;align-items:center;gap:5px;margin-top:7px;color:var(--sage,#6B7F6E);font-size:12px;font-weight:900;}
+.sv-status-card .weather-value{font-size:20px;font-weight:900;color:var(--stone,#2C2C2A);line-height:1.32;}
+.sv-status-card--weather .sv-status-icon{background:rgba(200,146,58,0.14);}
+.sv-status-card--weather .sv-status-icon svg{color:var(--amber,#C8923A);}
+.sv-status-card--safety .sv-status-icon{background:rgba(13,148,136,0.12);}
+.sv-status-card--safety .sv-status-icon svg{color:var(--care-teal,#0D9488);}
+.sv-status-card .official-alert-meta{margin-top:10px;padding:10px 11px;border-radius:10px;background:rgba(214,228,225,0.52);border:1px solid rgba(44,44,42,0.08);color:var(--slate,#4A5568);font-size:11px;line-height:1.55;}
+.sv-status-card .official-alert-meta strong{color:var(--stone,#2C2C2A);}
+.sv-status-disclaimer{max-width:1280px;margin:-5px auto 0;padding:0 40px 13px;font-size:11px;line-height:1.55;color:var(--slate,#4A5568);}
+.sv-status-disclaimer strong{color:var(--stone,#2C2C2A);}
+@media(max-width:980px){.sv-live-status-inner{grid-template-columns:1fr}.sv-status-disclaimer{padding-left:40px;padding-right:40px}}
+@media(max-width:720px){.sv-live-status-inner{padding-left:16px!important;padding-right:16px!important}.sv-status-disclaimer{padding-left:16px;padding-right:16px}.sv-status-card{border-radius:14px}}
+
+    .official-alert-meta {margin-top:14px;padding:13px 14px;border-radius:13px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.78);font-size:11.5px;line-height:1.55;}
+    .official-alert-meta strong { color: var(--white); font-weight: 900; }
+    .official-alert-meta a { color: var(--glacier); font-weight: 900; border-bottom: 1px solid rgba(214,228,225,0.36); }
+    .suppressed-alert-note {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start;margin:0 0 20px;padding:18px 20px;border-radius:16px;background:rgba(217,119,6,0.10);border:1px solid rgba(217,119,6,0.20);border-left:4px solid var(--care-amber);box-shadow:var(--shadow-1);}
+    .suppressed-alert-note.is-hidden { display: none; }
+    .suppressed-title { font-size: 13px; font-weight: 900; color: var(--stone); margin-bottom: 5px; }
+    .suppressed-copy { font-size: 12.5px; color: var(--slate); line-height: 1.62; }
+    .hidden-route-list { margin-top: 9px; display:flex; flex-wrap:wrap; gap:6px; }
+    .hidden-route-pill { font-size: 11px; font-weight: 900; border-radius: var(--r-pill); padding: 4px 9px; background: rgba(255,255,255,0.72); color: #8B641F; border: 1px solid rgba(217,119,6,0.16); }
+    .suppressed-link { white-space: nowrap; color: var(--sage); font-size: 12px; font-weight: 900; padding-top: 2px; }
+    @media (max-width:720px){ .suppressed-alert-note{grid-template-columns:1fr}.suppressed-link{white-space:normal} }
+
+/* ═══════════════════════════════════════════════
+   SomaVio V1.4 — Independent Weather / Safety Controls
+════════════════════════════════════════════════ */
+.hero-grid{display:block;}
+.hero-grid > div{max-width:760px;}
+.sv-live-status-inner{grid-template-columns:repeat(2,minmax(0,1fr));}
+.sv-status-card{display:flex;flex-direction:column;}
+.sv-status-control{margin-top:14px;padding-top:12px;border-top:1px solid rgba(44,44,42,0.08);}
+.status-scenario-label{display:block;margin-bottom:7px;font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--sage,#6B7F6E);}
+.status-scenario-select{width:100%;appearance:auto;background:rgba(255,255,255,0.94);color:var(--stone,#2C2C2A);border:1px solid rgba(44,44,42,0.14);border-radius:10px;padding:11px 12px;font-size:12px;font-weight:800;outline:none;}
+.status-scenario-select:focus{border-color:var(--sage,#6B7F6E);box-shadow:0 0 0 3px rgba(107,127,110,0.12);}
+.sv-status-card .sv-status-meta{margin-top:11px;padding:10px 11px;border-radius:10px;background:rgba(214,228,225,0.52);border:1px solid rgba(44,44,42,0.08);color:var(--slate,#4A5568);font-size:11px;line-height:1.55;}
+.sv-status-card .sv-status-meta strong{color:var(--stone,#2C2C2A);}
+@media(max-width:980px){.sv-live-status-inner{grid-template-columns:1fr;}}
+@media(max-width:720px){.status-scenario-select{font-size:12px;}.sv-status-card .weather-value{font-size:18px;}}
+
+</style>
+</head>
+<body>
+<div class="context-bar"><span><span class="ctx-accent" data-i18n="plans_context">Canmore · Adaptive planning</span></span></div>
+<header class="site-header">
+<div class="header-inner">
+<a aria-label="SomaVio home" class="logo" href="index.html">
+<span aria-hidden="true" class="logo-icon"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span>
+        SomaVio
+      </a>
+<nav aria-label="Site navigation" class="main-nav">
+<a data-i18n="nav_explore_canmore" href="index.html">Explore Canmore</a>
+<a data-i18n="nav_outdoor_adventures" href="category.html">Outdoor Adventures</a>
+<a data-i18n="nav_local_rules" href="local-rules.html">Local Rules</a>
+<a aria-current="page" class="active" data-i18n="nav_plans_changed" href="plans-changed.html">Plans Changed?</a>
+<a data-i18n="nav_plan_your_day" href="trip.html">My Trip</a>
+<a class="sv-guesthub-link is-guesthub-context" data-default-href="hotel.html" data-guest-href="guesthub.html" data-guesthub-link="" data-i18n="nav_guesthub_signin" href="hotel.html">Guest Hub / Sign In</a>
+</nav>
+<div class="header-actions">
+<div class="lang-selector-wrap">
+<button aria-expanded="false" aria-haspopup="true" class="lang-toggle" id="lang-toggle" type="button">EN <svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+<div aria-label="Language selector" class="lang-dropdown" id="lang-dropdown" role="menu">
+<button class="lang-option active" data-lang="en" role="menuitem" type="button"><span class="lang-flag">🇬🇧</span><span data-i18n="language_english">English</span></button>
+<button class="lang-option" data-lang="ja" role="menuitem" type="button"><span class="lang-flag">🇯🇵</span><span data-i18n="language_japanese">日本語</span></button>
+</div>
+</div>
+<div class="mobile-actions"><button aria-label="Open navigation menu" class="hamburger-btn" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg></button></div>
+</div>
+</div>
+</header>
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div aria-label="Navigation menu" aria-modal="true" class="drawer" id="drawer" role="dialog">
+<div class="drawer-header">
+<div class="drawer-logo"><div class="drawer-logo-icon"><svg fill="none" height="14" stroke="#fff" stroke-width="1.5" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div>SomaVio</div>
+<button aria-label="Close menu" class="drawer-close" type="button"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button>
+</div>
+<div class="drawer-nav">
+<div class="drawer-nav-label" data-i18n="drawer_nav_label">Navigate</div>
+<a data-i18n="nav_explore_canmore" href="index.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 10v10h14V10"></path><path d="M9 20v-6h6v6"></path></svg><span>Explore Canmore</span></a>
+<a data-i18n="nav_outdoor_adventures" href="category.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg><span>Outdoor Adventures</span></a>
+<a data-i18n="nav_local_rules" href="local-rules.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>Local Rules</span></a>
+<a aria-current="page" class="active" data-i18n="nav_plans_changed" href="plans-changed.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 19H8a6 6 0 1 1 5.4-8.6A4.5 4.5 0 1 1 17.5 19Z"></path></svg><span>Plans Changed?</span></a>
+<a data-i18n="nav_plan_your_day" href="trip.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" width="18" x="3" y="4"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>My Trip</span></a>
+<a class="sv-guesthub-link is-guesthub-context" data-default-href="hotel.html" data-guest-href="guesthub.html" data-guesthub-link="" data-i18n="nav_guesthub_signin" href="hotel.html"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15 8 3 3"></path><path d="m18 5 3 3"></path></svg><span>Guest Hub / Sign In</span></a>
+</div>
+<div class="drawer-lang">
+<div class="drawer-lang-label" data-i18n="drawer_language">Language</div>
+<div class="drawer-lang-grid">
+<button class="drawer-lang-btn lang-option active" data-lang="en" type="button">🇬🇧 EN</button>
+<button class="drawer-lang-btn lang-option" data-lang="ja" type="button">🇯🇵 JA</button>
+</div>
+</div>
+<div class="drawer-footer" data-i18n="drawer_footer">SomaVio · Local guidance for Alberta
+© 2026</div>
+</div>
+<main>
+<section class="adaptive-hero">
+<div class="hero-inner">
+<div class="container">
+<a class="context-return-link" data-context-return="" data-default-href="hotel.html" data-guest-href="guesthub.html" data-i18n="context_return_hotel" href="hotel.html">← Back to Hotel Website</a>
+<div class="hero-grid">
+<div>
+<div class="hero-label label-caps" data-i18n="plans_hero_label">Adaptive Route Desk · Demo</div>
+<h1 class="hero-title" data-i18n="plans_hero_title">Plans changed? That’s part of the adventure.</h1>
+<p class="hero-sub" data-i18n="plans_hero_sub">Mountain days shift fast. Weather, wildlife alerts, road conditions or tired legs can change the original plan — so SomaVio helps visitors pivot with calm, curated alternatives for the moment they are actually in.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Current weather and safety status" class="sv-live-status">
+<div class="container">
+<div class="sv-live-status-inner">
+<article class="sv-status-card sv-status-card--weather">
+<div class="sv-status-card-header">
+<span aria-hidden="true" class="sv-status-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg></span>
+<div class="sv-status-kicker">Weather</div>
+</div>
+<div class="sv-status-main weather-value" id="weather-value">☀️ Canmore · 18°C · Sunny Day</div>
+<p class="sv-status-sub" data-i18n="plans_weather_note">Live integrations can connect this layer to official weather, alerts and partner availability.</p>
+<div class="sv-status-control">
+<label class="status-scenario-label" for="weather-scenario-select">Simulate Weather (Demo Only)</label>
+<select aria-label="Simulate weather conditions" class="status-scenario-select" id="weather-scenario-select">
+<option value="clear">☀️ Clear Skies · 18°C</option>
+<option value="rain">⛈️ Heavy Rain / Storm · 9°C</option>
+<option value="wind">🌬️ Windy Mountain Conditions · 11°C</option>
+<option value="snow">❄️ Snow / Icy Conditions · 1°C</option>
+</select>
+</div>
+<div class="sv-status-meta" id="weather-meta"><strong>Weather source:</strong> Environment and Climate Change Canada · <strong>Last checked by SomaVio:</strong> 9:10 AM</div>
+</article>
+<article class="sv-status-card sv-status-card--safety">
+<div class="sv-status-card-header">
+<span aria-hidden="true" class="sv-status-icon"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9.5 12 1.6 1.6 3.5-3.5"></path></svg></span>
+<div class="sv-status-kicker">Safety status</div>
+</div>
+<div class="sv-status-main weather-value" id="safety-alert-value">🛡️ Safety Status: Clear &amp; Safe</div>
+<div class="sv-status-control">
+<label class="status-scenario-label" for="safety-scenario-select">Simulate Safety Status (Demo Only)</label>
+<select aria-label="Simulate safety status" class="status-scenario-select" id="safety-scenario-select">
+<option value="clear">🛡️ Clear &amp; Safe</option>
+<option value="wildlife">🚨 Wildlife Alert · Grassi Lakes Trail</option>
+<option value="closure">⛔ Trail Closure · Grassi Lakes Route</option>
+<option value="road">⚠️ Road / Access Advisory · Trailhead Route</option>
+</select>
+</div>
+<div class="official-alert-meta" id="official-alert-meta"><strong>Official source check:</strong> Parks Canada / Alberta Parks · <strong>Last checked by SomaVio:</strong> 9:10 AM. No active demo alert selected.</div>
+</article>
+</div>
+<p class="sv-status-disclaimer"><strong>Demo only:</strong> SomaVio displays official-source alerts for visitor orientation. For real-time conditions, verify directly with the official source.</p>
+</div>
+</section>
+<section aria-label="Adaptive route filters" class="filters-bar">
+<div class="container filters-inner">
+<span class="filter-label" data-i18n="plans_filter_label">Show:</span>
+<button class="filter-btn active" data-filter="all" type="button">All Adaptive Routes</button>
+<button class="filter-btn" data-filter="alert" type="button">🚨 Trail &amp; Road Alerts</button>
+<button class="filter-btn" data-filter="weather" type="button">⛈️ Weather &amp; Indoor</button>
+<button class="filter-btn" data-filter="cozy" type="button">💆 Cozy &amp; Recovery</button>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="section-kicker label-caps" data-i18n="plans_section_kicker">Flexible options</div>
+<h2 class="section-title" data-i18n="plans_section_title">Keep the day moving without forcing the original plan.</h2>
+</div>
+<p class="section-sub" data-i18n="plans_section_sub">These cards demonstrate how SomaVio can hide exposed mountain plans during poor conditions and surface safer, warmer or lower-friction alternatives instantly.</p>
+</div>
+<div class="results-count" id="results-count">8 adaptive options ready now</div><div aria-live="polite" class="suppressed-alert-note is-hidden" id="suppressed-alert-note"><div><div class="suppressed-title" id="suppressed-alert-title">Options not shown for the selected conditions</div><p class="suppressed-copy" id="suppressed-alert-copy">Some options are not being shown because they are exposed to the selected weather conditions or tied to the specific area affected by an active safety advisory. Outdoor partners may still appear when they offer safe alternatives outside the affected location.</p><div class="hidden-route-list" id="hidden-route-list"></div><p class="suppressed-copy" style="margin-top:9px;"><strong>For real-time status:</strong> verify directly with the official source. SomaVio displays official-source alerts for visitor orientation only.</p></div><a class="suppressed-link" href="safety.html">Verify official sources →</a></div>
+<div class="adaptive-grid" id="adaptive-grid">
+<article class="adaptive-card" data-alert-affects="grassi-lakes-wildlife grassi-lakes-closure" data-scenario="clear" data-tags="clear outdoor" data-title="Grassi Lakes Morning Reset" data-weather-sensitive="rain wind snow">
+<div class="card-img">
+<img alt="Mountain lake trail near Canmore" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Location-specific</span>
+<button aria-label="Save Grassi Lakes Morning Reset" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Grassi Lakes Morning Reset')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Best when conditions are calm</div>
+<h3 class="card-title">Grassi Lakes Morning Reset</h3>
+<div class="card-meta">Outdoor · 2–3 hrs · Check official trail status</div>
+<div class="card-tags"><span class="tag green">High confidence for clear weather</span><span class="tag">Trail check needed</span></div>
+<p class="card-desc">A classic outdoor option that should disappear from recommendations when wildlife or storm scenarios are active.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Grassi Lakes Morning Reset')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="category.html">Details</a></div>
+</div>
+</article><article class="adaptive-card" data-alert-affects="grassi-lakes-wildlife grassi-lakes-closure" data-scenario="clear" data-tags="clear outdoor guided" data-title="Grassi Lakes Guided Hike" data-weather-sensitive="rain wind snow"><div class="card-img"><img alt="Guided hiking group in mountain terrain" src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/><span class="card-context-tag">Affected location</span><button aria-label="Save Grassi Lakes Guided Hike" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Grassi Lakes Guided Hike')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div><div class="adaptive-card-body"><div class="featured-label">Hidden only when this specific trail is affected</div><h3 class="card-title">Grassi Lakes Guided Hike</h3><div class="card-meta">Guide · Trail-based · Grassi Lakes area</div><div class="card-tags"><span class="tag">Location-specific</span><span class="tag amber">Official check required</span></div><p class="card-desc">This card demonstrates that a partner guide is not removed as a business category — only the experience tied to the affected location is suppressed.</p><div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Grassi Lakes Guided Hike')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-guide.html">Details</a></div></div></article><article class="adaptive-card" data-alert-affects="grassi-lakes-wildlife grassi-lakes-closure grassi-lakes-road" data-scenario="clear" data-tags="clear outdoor shuttle" data-title="Grassi Lakes Trailhead Shuttle" data-weather-sensitive="rain wind snow"><div class="card-img"><img alt="Mountain shuttle vehicle on a road" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/><span class="card-context-tag">Affected route</span><button aria-label="Save Grassi Lakes Trailhead Shuttle" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Grassi Lakes Trailhead Shuttle')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div><div class="adaptive-card-body"><div class="featured-label">Route hidden, shuttle partner remains available</div><h3 class="card-title">Grassi Lakes Trailhead Shuttle</h3><div class="card-meta">Transport · Specific trailhead · Grassi Lakes</div><div class="card-tags"><span class="tag">Location-specific</span><span class="tag amber">Suppressed under alert</span></div><p class="card-desc">This exact route is hidden during the Grassi Lakes wildlife scenario, while the shuttle partner can still offer other safe routes.</p><div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Grassi Lakes Trailhead Shuttle')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-shuttle.html">Details</a></div></div></article><article class="adaptive-card" data-scenario="wildlife alert" data-tags="alert guided outdoor" data-title="Peak &amp; Valley Alternative Route"><div class="card-img"><img alt="Alternative mountain trail route" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/><span class="card-context-tag">Safe alternative</span><button aria-label="Save Peak &amp; Valley Alternative Route" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Peak &amp; Valley Alternative Route')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div><div class="adaptive-card-body"><div class="featured-label">Outdoor partner remains visible</div><h3 class="card-title">Peak &amp; Valley Alternative Route</h3><div class="card-meta">Guide · Alternative location · Official check first</div><div class="card-tags"><span class="tag green">Alternative route available</span><span class="tag amber">Avoids affected area</span></div><p class="card-desc">The guide remains visible because the business can redirect visitors away from the affected trail and toward a safer location.</p><div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Peak &amp; Valley Alternative Route')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-guide.html">Details</a></div></div></article>
+<article class="adaptive-card" data-scenario="rain cozy" data-tags="rain weather indoor cozy" data-title="The Mountain Grind Café">
+<div class="card-img">
+<img alt="Cozy café table with coffee" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Rain pivot</span>
+<button aria-label="Save The Mountain Grind Café" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('The Mountain Grind Café')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Cozy indoor fallback</div>
+<h3 class="card-title">The Mountain Grind Café</h3>
+<div class="card-meta">Indoor · Wi‑Fi · Walkable</div>
+<div class="card-tags"><span class="tag amber">Weather-smart option</span><span class="tag green">Verified local partner</span></div>
+<p class="card-desc">A warm local stop for guests who need to slow down, regroup, check alerts and rebuild the day from town.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('The Mountain Grind Café')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-cafe.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="rain" data-tags="rain weather indoor family" data-title="Canmore Climbing Lab">
+<div class="card-img">
+<img alt="Indoor climbing wall" src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Indoor energy</span>
+<button aria-label="Save Canmore Climbing Lab" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Canmore Climbing Lab')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Keeps active visitors moving</div>
+<h3 class="card-title">Canmore Climbing Lab</h3>
+<div class="card-meta">Indoor · Family-friendly · Gear available</div>
+<div class="card-tags"><span class="tag amber">Storm-proof plan</span><span class="tag">All ages</span></div>
+<p class="card-desc">A good replacement when exposed trails are not ideal but visitors still want a memorable mountain-feeling activity.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Canmore Climbing Lab')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-indoor.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="rain cozy" data-tags="cozy recovery rain indoor" data-title="Summit Wellness Spa">
+<div class="card-img">
+<img alt="Spa recovery room" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Recovery route</span>
+<button aria-label="Save Summit Wellness Spa" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Summit Wellness Spa')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">For tired legs or slow evenings</div>
+<h3 class="card-title">Summit Wellness Spa</h3>
+<div class="card-meta">Recovery · 60–90 min · Calm indoor plan</div>
+<div class="card-tags"><span class="tag green">Cozy &amp; Recovery</span><span class="tag amber">Rain-friendly</span></div>
+<p class="card-desc">A premium pivot when the better choice is recovery instead of forcing one more hike or drive.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Summit Wellness Spa')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-wellness.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="wildlife rain alert" data-tags="alert road shuttle weather" data-title="Bow Valley Shuttle Flex Route">
+<div class="card-img">
+<img alt="Shuttle bus on mountain road" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Route support</span>
+<button aria-label="Save Bow Valley Shuttle Flex Route" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Bow Valley Shuttle Flex Route')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">When access is uncertain</div>
+<h3 class="card-title">Bow Valley Shuttle Flex Route</h3>
+<div class="card-meta">Transport · Trailhead changes · Town access</div>
+<div class="card-tags"><span class="tag amber">Trail &amp; road alerts</span><span class="tag green">Lower-friction pivot</span></div>
+<p class="card-desc">A transport-aware option for visitors who need to change trailheads, avoid parking stress or shift toward town routes.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Bow Valley Shuttle Flex Route')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-shuttle.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="wildlife alert" data-tags="alert safety official" data-title="Trail Alert &amp; Safety Check Desk">
+<div class="card-img">
+<img alt="Mountain trail signage" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Official checks</span>
+<button aria-label="Save Trail Alert &amp; Safety Check Desk" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Trail Alert &amp; Safety Check Desk')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Start here during wildlife alerts</div>
+<h3 class="card-title">Trail Alert &amp; Safety Check Desk</h3>
+<div class="card-meta">Official-source orientation · No emergency replacement</div>
+<div class="card-tags"><span class="tag amber">Official info checked</span><span class="tag">Bear on trail scenario</span></div>
+<p class="card-desc">Routes visitors away from guesswork and toward official-source links before they pick an alternative trail or indoor plan.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Trail Alert &amp; Safety Check Desk')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="safety.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="rain cozy wildlife" data-tags="cozy recovery hotel indoor public" data-title="The Alpine Hotel Recovery Lounge">
+<div class="card-img">
+<img alt="Premium hotel lounge" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Hotel service</span>
+<button aria-label="Save The Alpine Hotel Recovery Lounge" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('The Alpine Hotel Recovery Lounge')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Partner hotel public service</div>
+<h3 class="card-title">The Alpine Hotel Recovery Lounge</h3>
+<div class="card-meta">Lounge · Sauna inquiry · Breakfast add-on</div>
+<div class="card-tags"><span class="tag public" data-i18n="plans_public_tag">Open to Public · Non-Guests Welcome</span><span class="tag green">Cozy &amp; Recovery</span></div>
+<p class="card-desc">A commercial demo card showing how partner hotel services can appear as public-friendly alternatives when plans change.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('The Alpine Hotel Recovery Lounge')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="hotel.html">Details</a></div>
+</div>
+</article>
+<article class="adaptive-card" data-scenario="rain cozy" data-tags="cozy rain retail indoor" data-title="Bow Valley Makers Indoor Stroll">
+<div class="card-img">
+<img alt="Local maker shop display" src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&amp;q=84&amp;auto=format&amp;fit=crop"/>
+<span class="card-context-tag">Soft plan</span>
+<button aria-label="Save Bow Valley Makers Indoor Stroll" class="exp-save-btn" onclick="toggleSave(this); saveToTrip('Bow Valley Makers Indoor Stroll')" type="button"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+</div>
+<div class="adaptive-card-body">
+<div class="featured-label">Low-energy local discovery</div>
+<h3 class="card-title">Bow Valley Makers Indoor Stroll</h3>
+<div class="card-meta">Retail · Local goods · Easy town plan</div>
+<div class="card-tags"><span class="tag amber">Weather-smart option</span><span class="tag green">Supports local</span></div>
+<p class="card-desc">A low-pressure alternative for visitors who want to stay in the destination mood without committing to a strenuous plan.</p>
+<div class="card-actions"><button class="card-ghost" data-i18n="plans_save" onclick="saveToTrip('Bow Valley Makers Indoor Stroll')" type="button">+ Trip</button><a class="card-cta" data-i18n="plans_details" href="partner-retail.html">Details</a></div>
+</div>
+</article>
+</div>
+<div class="scenario-note"><strong>Demo behaviour:</strong> the scenario menu simulates how SomaVio can instantly suppress exposed outdoor routes during storms or wildlife alerts, then elevate indoor, shuttle, safety-check and recovery alternatives without refreshing the page.</div>
+</div>
+</section>
+</main>
+<footer class="footer-b2b">
+<div class="container">
+<div class="footer-grid">
+<div>
+<div class="footer-logo"><span>SomaVio</span></div>
+<div class="footer-tagline">Local guidance for Alberta.</div>
+<div class="footer-copy">© 2026 SomaVio</div>
+</div>
+<div class="footer-col">
+<div class="footer-col-title label-caps">Visitors</div>
+<a href="index.html">Explore Canmore</a>
+<a href="category.html">Outdoor Adventures</a>
+<a href="plans-changed.html">Plans Changed?</a>
+</div>
+<div class="footer-col">
+<div class="footer-col-title label-caps">Stay Moment</div>
+<a href="local-rules.html">Local Rules</a>
+<a href="trip.html">My Trip</a>
+<a href="safety.html">Safety Hub</a>
+</div>
+<div class="footer-col">
+<div class="footer-col-title label-caps">Hotel</div>
+<a href="hotel.html">Hotel Website</a>
+<a href="guesthub.html">Guest Hub</a>
+<p class="footer-message">SomaVio complements official sources and hotel operations. It does not replace emergency instructions.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    function toggleSave(btn) {
+      btn.classList.toggle('saved');
+      const isSaved = btn.classList.contains('saved');
+      btn.setAttribute('aria-label', isSaved ? 'Saved to My Trip' : 'Save to My Trip');
+    }
+
+    function saveToTrip(name) {
+      try {
+        const key = 'sv_trip';
+        const existing = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!existing.includes(name)) {
+          existing.push(name);
+          localStorage.setItem(key, JSON.stringify(existing));
+        }
+      } catch (_) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const weatherScenarioSelect = document.getElementById('weather-scenario-select');
+      const safetyScenarioSelect = document.getElementById('safety-scenario-select');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#adaptive-grid .adaptive-card');
+      const resultsCount = document.getElementById('results-count');
+      const weatherValue = document.getElementById('weather-value');
+      const weatherMeta = document.getElementById('weather-meta');
+      const safetyValue = document.getElementById('safety-alert-value');
+      const officialMeta = document.getElementById('official-alert-meta');
+      const suppressedNote = document.getElementById('suppressed-alert-note');
+      const suppressedTitle = document.getElementById('suppressed-alert-title');
+      const suppressedCopy = document.getElementById('suppressed-alert-copy');
+      const hiddenRouteList = document.getElementById('hidden-route-list');
+
+      let activeWeatherScenario = weatherScenarioSelect ? weatherScenarioSelect.value : 'clear';
+      let activeSafetyScenario = safetyScenarioSelect ? safetyScenarioSelect.value : 'clear';
+      let activeFilterMode = 'all';
+
+      const weatherScenarioMap = {
+        clear: {
+          weather: '☀️ Canmore · 18°C · Sunny Day',
+          meta: '<strong>Weather source:</strong> Environment and Climate Change Canada · <strong>Last checked by SomaVio:</strong> 9:10 AM',
+          recommendationTags: [],
+          highlightTokens: ['clear']
+        },
+        rain: {
+          weather: '⛈️ Canmore · 9°C · Heavy Rain / Storm',
+          meta: '<strong>Weather advisory:</strong> Environment and Climate Change Canada · <strong>Last checked by SomaVio:</strong> 9:15 AM',
+          recommendationTags: ['weather', 'rain', 'indoor', 'cozy', 'recovery'],
+          highlightTokens: ['rain', 'cozy']
+        },
+        wind: {
+          weather: '🌬️ Canmore · 11°C · Windy Mountain Conditions',
+          meta: '<strong>Weather advisory:</strong> Environment and Climate Change Canada · <strong>Last checked by SomaVio:</strong> 9:18 AM',
+          recommendationTags: ['weather', 'indoor', 'cozy', 'recovery'],
+          highlightTokens: ['rain', 'cozy']
+        },
+        snow: {
+          weather: '❄️ Canmore · 1°C · Snow / Icy Conditions',
+          meta: '<strong>Weather advisory:</strong> Environment and Climate Change Canada · <strong>Last checked by SomaVio:</strong> 9:22 AM',
+          recommendationTags: ['weather', 'indoor', 'cozy', 'recovery', 'shuttle'],
+          highlightTokens: ['rain', 'cozy']
+        }
+      };
+
+      const safetyScenarioMap = {
+        clear: {
+          safety: '🛡️ Safety Status: Clear & Safe',
+          meta: '<strong>Official source check:</strong> Parks Canada / Alberta Parks · <strong>Last checked by SomaVio:</strong> 9:10 AM. No active demo alert selected.',
+          affectedKey: '',
+          recommendationTags: [],
+          highlightTokens: []
+        },
+        wildlife: {
+          safety: '🚨 Wildlife Alert: Bear Activity at Grassi Lakes',
+          meta: '<strong>Demo wildlife advisory:</strong> Alberta Parks Wildlife · <strong>Alert issued:</strong> 9:10 AM · <strong>Last checked by SomaVio:</strong> 9:11 AM. <a href="safety.html">Verify official source →</a>',
+          affectedKey: 'grassi-lakes-wildlife',
+          recommendationTags: ['alert', 'safety', 'official', 'road', 'shuttle', 'cozy', 'recovery', 'indoor'],
+          highlightTokens: ['wildlife', 'alert']
+        },
+        closure: {
+          safety: '⛔ Trail Closure: Grassi Lakes Route Closed',
+          meta: '<strong>Demo closure advisory:</strong> Alberta Parks · <strong>Alert issued:</strong> 9:08 AM · <strong>Last checked by SomaVio:</strong> 9:12 AM. <a href="safety.html">Verify official source →</a>',
+          affectedKey: 'grassi-lakes-closure',
+          recommendationTags: ['alert', 'safety', 'official', 'road', 'shuttle', 'cozy', 'recovery', 'indoor'],
+          highlightTokens: ['alert', 'wildlife']
+        },
+        road: {
+          safety: '⚠️ Road / Access Advisory: Grassi Lakes Trailhead Route',
+          meta: '<strong>Demo access advisory:</strong> Alberta 511 / Alberta Parks · <strong>Alert issued:</strong> 9:05 AM · <strong>Last checked by SomaVio:</strong> 9:14 AM. <a href="safety.html">Verify official source →</a>',
+          affectedKey: 'grassi-lakes-road',
+          recommendationTags: ['alert', 'road', 'shuttle', 'safety', 'official', 'cozy', 'recovery', 'indoor'],
+          highlightTokens: ['alert', 'wildlife']
+        }
+      };
+
+      function tokens(value) {
+        return String(value || '').trim().split(/\s+/).filter(Boolean);
+      }
+
+      function hasActiveContext() {
+        return activeWeatherScenario !== 'clear' || activeSafetyScenario !== 'clear';
+      }
+
+      function getWeatherContext() {
+        return weatherScenarioMap[activeWeatherScenario] || weatherScenarioMap.clear;
+      }
+
+      function getSafetyContext() {
+        return safetyScenarioMap[activeSafetyScenario] || safetyScenarioMap.clear;
+      }
+
+      function getContextHighlights() {
+        return Array.from(new Set([
+          ...getWeatherContext().highlightTokens,
+          ...getSafetyContext().highlightTokens
+        ]));
+      }
+
+      function setActiveFilterButton(filter) {
+        filterButtons.forEach(function (btn) {
+          btn.classList.toggle('active', filter && btn.dataset.filter === filter);
+        });
+      }
+
+      function isSuppressedByActiveContext(card) {
+        const weatherSensitive = tokens(card.dataset.weatherSensitive);
+        const safetyAffected = tokens(card.dataset.alertAffects);
+        const weatherSuppressed = activeWeatherScenario !== 'clear' && weatherSensitive.includes(activeWeatherScenario);
+        const safetyKey = getSafetyContext().affectedKey;
+        const safetySuppressed = Boolean(safetyKey && safetyAffected.includes(safetyKey));
+        return weatherSuppressed || safetySuppressed;
+      }
+
+      function cardMatchesCurrentContexts(card) {
+        if (!hasActiveContext()) return true;
+        const cardTags = tokens(card.dataset.tags);
+        const cardScenarios = tokens(card.dataset.scenario);
+        const weather = getWeatherContext();
+        const safety = getSafetyContext();
+        const matchesWeather = activeWeatherScenario !== 'clear' && (
+          cardScenarios.includes(activeWeatherScenario) ||
+          weather.recommendationTags.some(function (tag) { return cardTags.includes(tag); })
+        );
+        const matchesSafety = activeSafetyScenario !== 'clear' && (
+          cardScenarios.includes(activeSafetyScenario) ||
+          safety.recommendationTags.some(function (tag) { return cardTags.includes(tag); })
+        );
+        return matchesWeather || matchesSafety;
+      }
+
+      function cardMatches(card, filter) {
+        if (filter === 'all') return true;
+        if (filter === 'context') return cardMatchesCurrentContexts(card);
+        return tokens(card.dataset.tags).includes(filter);
+      }
+
+      function updateSuppressedNotice() {
+        if (!suppressedNote || !hiddenRouteList) return;
+        const hiddenTitles = [];
+        cards.forEach(function (card) {
+          if (isSuppressedByActiveContext(card)) {
+            hiddenTitles.push(card.dataset.title || (card.querySelector('.card-title') || {}).textContent || 'Affected option');
+          }
+        });
+
+        hiddenRouteList.innerHTML = hiddenTitles.map(function (title) {
+          return '<span class="hidden-route-pill">' + title + '</span>';
+        }).join('');
+        suppressedNote.classList.toggle('is-hidden', hiddenTitles.length === 0);
+
+        const weatherActive = activeWeatherScenario !== 'clear';
+        const safetyActive = activeSafetyScenario !== 'clear';
+        if (suppressedTitle) {
+          suppressedTitle.textContent = weatherActive && safetyActive
+            ? 'Options not shown for the selected weather and safety conditions'
+            : weatherActive
+              ? 'Options not shown for the selected weather conditions'
+              : 'Options not shown due to the current safety advisory';
+        }
+        if (suppressedCopy) {
+          suppressedCopy.textContent = weatherActive && safetyActive
+            ? 'Some options are not being shown because they are exposed to the selected weather conditions or tied to the specific area affected by the active safety advisory. Outdoor partners may still appear when they offer safe alternatives outside the affected location.'
+            : weatherActive
+              ? 'Some options are not being shown because they are exposed to the selected weather conditions. Safer indoor, recovery and lower-friction alternatives remain available.'
+              : 'Some options are not being shown because they are tied to the specific area affected by the current safety advisory. Outdoor partners may still appear when they offer safe alternatives outside the affected location.';
+        }
+      }
+
+      function applyFilter(filter, highlightTokens) {
+        let visible = 0;
+        const highlightSet = new Set(highlightTokens || []);
+        cards.forEach(function (card) {
+          const suppressed = isSuppressedByActiveContext(card);
+          const isMatch = !suppressed && cardMatches(card, filter);
+          const scenarioTokens = tokens(card.dataset.scenario);
+          const isHighlighted = isMatch && scenarioTokens.some(function (token) { return highlightSet.has(token); });
+          card.classList.toggle('is-hidden', !isMatch);
+          card.classList.toggle('is-highlighted', isHighlighted);
+          if (isMatch) visible += 1;
+        });
+        if (resultsCount) {
+          resultsCount.textContent = visible + ' adaptive option' + (visible === 1 ? '' : 's') + ' ready now';
+        }
+        updateSuppressedNotice();
+      }
+
+      function renderWeather() {
+        const weather = getWeatherContext();
+        if (weatherValue) weatherValue.textContent = weather.weather;
+        if (weatherMeta) weatherMeta.innerHTML = weather.meta;
+      }
+
+      function renderSafety() {
+        const safety = getSafetyContext();
+        if (safetyValue) safetyValue.textContent = safety.safety;
+        if (officialMeta) officialMeta.innerHTML = safety.meta;
+      }
+
+      function applyContextualRecommendations() {
+        activeFilterMode = hasActiveContext() ? 'context' : 'all';
+        setActiveFilterButton(activeFilterMode === 'all' ? 'all' : null);
+        applyFilter(activeFilterMode, getContextHighlights());
+      }
+
+      function refreshFromStatusControls() {
+        renderWeather();
+        renderSafety();
+        applyContextualRecommendations();
+      }
+
+      filterButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const filter = btn.dataset.filter || 'all';
+          activeFilterMode = filter;
+          setActiveFilterButton(filter);
+          applyFilter(filter, [filter]);
+        });
+      });
+
+      if (weatherScenarioSelect) {
+        weatherScenarioSelect.addEventListener('change', function () {
+          activeWeatherScenario = weatherScenarioSelect.value || 'clear';
+          refreshFromStatusControls();
+        });
+      }
+
+      if (safetyScenarioSelect) {
+        safetyScenarioSelect.addEventListener('change', function () {
+          activeSafetyScenario = safetyScenarioSelect.value || 'clear';
+          refreshFromStatusControls();
+        });
+      }
+
+      renderWeather();
+      renderSafety();
+      applyContextualRecommendations();
+    });
+  </script>
+<script defer="" src="somavio-live.js"></script>
+</body>
+</html>
